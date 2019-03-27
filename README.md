@@ -47,8 +47,8 @@ This lightweight SDK connects Android to Zcash. It welds together Rust and Kotli
 - [Structure](#structure)
 - [Overview](#overview)
     - [Components](#components)
-- [Quick Start](#quick-start)
-- [Usage](#usage)
+- [Quickstart](#quickstart)
+- [Compiling Sources](#compiling-sources)
 
 ## Structure
 
@@ -114,13 +114,17 @@ synchronizer.sendToAddress(zatoshi, address, memo)
 ```
 
 [Back to contents](#contents)
-## Usage
+## Compiling Sources
 
 :warning: Presently, the latest stable code lives in the `preview` branch, under active development, and is not yet released. 
+
+Importing the dependency should be enough for use but in the event that you want to compile the SDK from sources, including the Kotlin and Rust portions, simply use Gradle.
 
 Compilation requires `Cargo` and has been tested on Ubuntu, MacOS and Windows. To compile the SDK run:
 
 ```bash
-./gradlew assembleZcashtestnetRelease
+./gradlew clean assembleZcashtestnetRelease
 ```
-This creates a `testnet` build of the SDK that can be used to preview basic functionality for sending and receiving shielded transactions. If you do not have `Rust` and `Cargo` installed, the build script will let you know and provide further instructions for installation.
+This creates a `testnet` build of the SDK that can be used to preview basic functionality for sending and receiving shielded transactions. If you do not have `Rust` and `Cargo` installed, the build script will let you know and provide further instructions for installation. Note that merely using the SDK does not require installing Rust or Cargo--that is only required for compilation.
+
+[Back to contents](#contents)
