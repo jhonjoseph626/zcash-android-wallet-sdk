@@ -46,10 +46,9 @@ This lightweight SDK connects Android to Zcash. It welds together Rust and Kotli
 
 - [Structure](#structure)
 - [Overview](#overview)
+    - [Components](#components)
 - [Quick Start](#quick-start)
-- [Animation Model](#animation-model)
-	- [Loading Animation](#loading-animation)
-- [A
+- [Usage](#usage)
 
 ## Structure
 
@@ -83,15 +82,39 @@ The Sychronizer takes care of
 
 To accomplish this, the synchronizer coordinates the behavior of multiple components. Think of the synchronizer as the glue between them all that coordinates interaction.
 
+#### Components
+
+Each primary responsibility of the SDK is handled by a separate component, as follows:
+
+**Downloader** - Downloads compact blocks    
+**Processor** - Processes compact blocks    
+**Repository** - Source of data derived from processing blocks    
+**Active Transaction Manager** - Manages the lifecycle of pending transactions    
+**Wallet** - Wraps the Zcash rust libraries, insulating SDK users from changes in that layer
   
 [Back to contents](#contents)
 ## Quickstart
 
+Add the SDK dependency
+```gradle
+implementation "cash.z.android.wallet:zcash-android-testnet:1.7.5-alpha@aar"
+```
+Start the synchronizer
+
+```kotlin
+synchronizer.start(this)
+```
+Get the wallet's address
+```kotlin
+synchronizer.getAddress()
+```
+Send funds to another address
+```kotlin
+synchronizer.sendToAddress(zatoshi, address, memo)
+```
+
 [Back to contents](#contents)
-
-
-
-# Usage
+## Usage
 
 :warning: Presently, the latest stable code lives in the `preview` branch, under active development, and is not yet released. 
 
