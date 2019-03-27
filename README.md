@@ -64,9 +64,9 @@ Thankfully, the only thing an app developer has to be concerned with is the foll
 [Back to contents](#contents)
 ## Overview
 
-At a high level, this SDK simply helps native Android codebases connect to Zcash's Rust crypto libraries without needing to know Rust or be a cryptographer. Think of it as welding. The SDK takes separate things and tightly bonds them together such that each can remain as idiomatic as possible. It's goal is to make it easy for an Android Developer to do shielded transactions while still remaining a good citizen of the device. 
+At a high level, this SDK simply helps native Android codebases connect to Zcash's Rust crypto libraries without needing to know Rust or be a Cryptographer. Think of it as welding. The SDK takes separate things and tightly bonds them together such that each can remain as idiomatic as possible. It's goal is to make it easy for an app to incorporate shielded transactions while remaining a good citizen on mobile devices. 
 
-Given all the moving parts, making things easy requires coordination. The Synchronzer provides that in a way where the primary steps to make use of this SDK are simply:
+Given all the moving parts, making things easy requires coordination. The Synchronzer provides that layer of abstraction so that the primary steps to make use of this SDK are simply:
 
   1. Start the synchronizer
   2. Subscribe to wallet data
@@ -80,17 +80,17 @@ The Sychronizer takes care of
     - Sending payments to a full node through the light wallet server
     - Monitoring sent payments for status updates
 
-To accomplish this, the synchronizer coordinates the behavior of multiple components. Think of the synchronizer as the glue between them all that coordinates interaction.
+To accomplish this, these responsibilities of the SDK are divided into separate components. Each component is coordinated by the Synchronizer, which is the thread that ties it all together.
 
 #### Components
 
-Each primary responsibility of the SDK is handled by a separate component, as follows:
-
-**Downloader** - Downloads compact blocks    
-**Processor** - Processes compact blocks    
-**Repository** - Source of data derived from processing blocks    
-**Active Transaction Manager** - Manages the lifecycle of pending transactions    
-**Wallet** - Wraps the Zcash rust libraries, insulating SDK users from changes in that layer
+| Component  | Summary | Input | Output |
+| :--------- | :------------ | :--- | :--- |
+| **Downloader** | Downloads compact blocks | Server host:port | Stream of compact blocks |
+| **Processor** | Processes compact blocks | Stream of compact blocks | Decoded wallet data |
+| **Repository** | Source of data derived from processing blocks | Decoded wallet data | UI Data |
+| **Active Transaction Manager** | Manages the lifecycle of pending transactions | Decoded wallet data | Transaction state |
+| **Wallet** | Wraps the Zcash rust libraries, insulating SDK users from changes in that layer | Configuration | Configuration |
   
 [Back to contents](#contents)
 ## Quickstart
